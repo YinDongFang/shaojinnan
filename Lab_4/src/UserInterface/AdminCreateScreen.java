@@ -208,7 +208,6 @@ public class AdminCreateScreen extends javax.swing.JPanel {
         JOptionPane.showMessageDialog(null, "Successful!");
         // 4. show the SuccessScreen
         CardLayout layout = (CardLayout)panelRight.getLayout();
-        panelRight.remove(this);
          panelRight.add(new SuccessScreen(user));
         layout.next(panelRight);       
     }//GEN-LAST:event_btnCreateActionPerformed
