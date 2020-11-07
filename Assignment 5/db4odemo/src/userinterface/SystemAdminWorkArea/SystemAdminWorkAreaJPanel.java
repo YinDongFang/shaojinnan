@@ -5,9 +5,15 @@
  */
 package userinterface.SystemAdminWorkArea;
 
+import Business.Customer.Customer;
+import Business.Customer.CustomerDirectory;
+import Business.DeliveryMan.DeliveryMan;
+import Business.DeliveryMan.DeliveryManDirectory;
 import Business.EcoSystem;
 
 import Business.Organization;
+import Business.Restaurant.Restaurant;
+import Business.Restaurant.RestaurantDirectory;
 import java.awt.CardLayout;
 import java.util.ArrayList;
 import javax.swing.JPanel;
@@ -34,8 +40,32 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
     
     public void populateTree(){
         DefaultTreeModel model=(DefaultTreeModel)jTree.getModel();
-       // Add the code for draw your system structure shown by JTree
-       
+        // Add the code for draw your system structure shown by JTree
+        DefaultMutableTreeNode root = new DefaultMutableTreeNode("EcoSystem");
+        DefaultMutableTreeNode customerNode = new DefaultMutableTreeNode("Customers");
+        DefaultMutableTreeNode restaurantsNode = new DefaultMutableTreeNode("Restaurants");
+        DefaultMutableTreeNode deliverymansNode = new DefaultMutableTreeNode("Deliverymans");
+        
+        root.add(customerNode);
+        root.add(restaurantsNode);
+        root.add(deliverymansNode);
+        
+        CustomerDirectory cd = ecosystem.getCustomerDirectory();
+        for(Customer c : cd.getCustomers()) {
+            customerNode.add(new DefaultMutableTreeNode(c));
+        }
+        
+        RestaurantDirectory rd = ecosystem.getRestaurantDirectory();
+        for(Restaurant r : rd.getRestaurants()) {
+            restaurantsNode.add(new DefaultMutableTreeNode(r));
+        }
+        
+        DeliveryManDirectory dd = ecosystem.getDeliveryManDirectory();
+        for(DeliveryMan d : dd.getDeliveryMans()) {
+            deliverymansNode.add(new DefaultMutableTreeNode(d));
+        }
+        
+        model.setRoot(root);
         model.reload();
     }
     /**
@@ -71,15 +101,11 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jScrollPane1)
-                .addContainerGap())
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 89, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 118, Short.MAX_VALUE))
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 393, Short.MAX_VALUE)
         );
 
         jSplitPane.setLeftComponent(jPanel1);

@@ -18,6 +18,27 @@ import java.util.ArrayList;
  * @author MyPC1
  */
 public class EcoSystem extends Organization{
+
+    /**
+     * @return the restaurantDirectory
+     */
+    public RestaurantDirectory getRestaurantDirectory() {
+        return restaurantDirectory;
+    }
+
+    /**
+     * @return the customerDirectory
+     */
+    public CustomerDirectory getCustomerDirectory() {
+        return customerDirectory;
+    }
+
+    /**
+     * @return the deliveryManDirectory
+     */
+    public DeliveryManDirectory getDeliveryManDirectory() {
+        return deliveryManDirectory;
+    }
     
     private static EcoSystem business;
     private RestaurantDirectory restaurantDirectory;
@@ -25,7 +46,7 @@ public class EcoSystem extends Organization{
     private DeliveryManDirectory deliveryManDirectory;
 
     public EcoSystem(RestaurantDirectory restaurantDirectory, CustomerDirectory customerDirectory, DeliveryManDirectory deliveryManDirectory) {
-
+        super(null);
         this.restaurantDirectory = restaurantDirectory;
         this.customerDirectory = customerDirectory;
         this.deliveryManDirectory = deliveryManDirectory;
@@ -45,7 +66,8 @@ public class EcoSystem extends Organization{
         return roleList;
     }
     private EcoSystem(){
-        super(null);
+        
+        this(new RestaurantDirectory(), new CustomerDirectory(), new DeliveryManDirectory());
        // networkList=new ArrayList<Network>();
     }
 
