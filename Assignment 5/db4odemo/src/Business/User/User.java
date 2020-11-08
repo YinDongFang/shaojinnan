@@ -2,19 +2,19 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package Business.Employee;
+package Business.User;
 
 /**
  *
  * @author raunak
  */
-public class Employee {
+public class User {
     
-    private String name;
-    private int id;
+    protected String name;
+    protected int id;
     private static int count = 1;
 
-    public Employee() {
+    public User() {
         id = count;
         count++;
     }

@@ -7,20 +7,19 @@ package Business.Customer;
 
 import Business.Order.Order;
 import Business.Order.OrderDirectory;
+import Business.User.User;
 import Business.Util;
 
 /**
  *
  * @author harold
  */
-public class Customer {
+public class Customer extends User {
 
-    private String name;
-    private String id;
     private OrderDirectory orderList;
 
     public Customer() {
-        this.id = Util.generateId();
+        super();
         orderList = new OrderDirectory();
     }
 
@@ -28,25 +27,8 @@ public class Customer {
         this.orderList.getOrderList().add(order);
     }
 
-    public String getId() {
-        return id;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getName() {
-        return name;
-    }
-
     public OrderDirectory getOrderList() {
         return orderList;
-    }
-
-    @Override
-    public String toString() {
-        return name;
     }
 
 }

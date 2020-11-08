@@ -4,7 +4,7 @@
  */
 package Business.UserAccount;
 
-import Business.Employee.Employee;
+import Business.User.User;
 import Business.Role.Role;
 import Business.Order.OrderDirectory;
 
@@ -16,7 +16,7 @@ public class UserAccount {
     
     private String username;
     private String password;
-    private Employee employee;
+    private User employee;
     private Role role;
     private OrderDirectory workQueue;
 
@@ -46,7 +46,7 @@ public class UserAccount {
         return role;
     }
 
-    public void setEmployee(Employee employee) {
+    public void setEmployee(User employee) {
         this.employee = employee;
     }
 
@@ -54,7 +54,7 @@ public class UserAccount {
         this.role = role;
     }
 
-    public Employee getEmployee() {
+    public User getEmployee() {
         return employee;
     }
 

@@ -7,20 +7,19 @@ package Business.DeliveryMan;
 
 import Business.Order.Order;
 import Business.Order.OrderDirectory;
+import Business.User.User;
 import Business.Util;
 
 /**
  *
  * @author harold
  */
-public class DeliveryMan {
+public class DeliveryMan extends User {
 
-    private String name;
-    private String id;
     private OrderDirectory orderList;
 
     public DeliveryMan() {
-        id = Util.generateId();
+        super();
         orderList = new OrderDirectory();
     }
 
@@ -28,25 +27,8 @@ public class DeliveryMan {
         this.orderList.getOrderList().add(order);
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getId() {
-        return id;
-    }
-
     public OrderDirectory getOrderList() {
         return orderList;
-    }
-
-    @Override
-    public String toString() {
-        return name;
     }
 
 }

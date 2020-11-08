@@ -17,9 +17,9 @@ public class StateTransition {
     private Status from;
     private Status to;
     private Date time;
-    private String operatorId;
+    private int operatorId;
 
-    public StateTransition(Status from, Status to, String operatorId) {
+    public StateTransition(Status from, Status to, int operatorId) {
         this.from = from;
         this.to = to;
         this.operatorId = operatorId;
@@ -43,11 +43,11 @@ public class StateTransition {
         this.to = to;
     }
 
-    public String getOperatorId() {
+    public int getOperatorId() {
         return operatorId;
     }
 
-    public void setOperatorId(String operatorId) {
+    public void setOperatorId(int operatorId) {
         this.operatorId = operatorId;
     }
 }

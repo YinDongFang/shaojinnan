@@ -7,7 +7,7 @@ package userinterface.SystemAdminWorkArea;
 
 import Business.Customer.Customer;
 import Business.EcoSystem;
-import Business.Employee.Employee;
+import Business.User.User;
 import Business.Role.CustomerRole;
 import Business.UserAccount.UserAccount;
 import java.awt.CardLayout;
@@ -235,7 +235,7 @@ public class CreateRestaurant extends javax.swing.JFrame {
         customer.setName(txtName.getText());
         customer.setUserName(txtUserName.getText());
         
-        Employee employee = ecosystem.getEmployeeDirectory().createEmployee(txtName.getText());
+        User employee = ecosystem.getEmployeeDirectory().createEmployee(txtName.getText());
         UserAccount ua = ecosystem.getUserAccountDirectory().createUserAccount(txtUserName.getText(), txtPassword.getText(), employee, new CustomerRole());
         
         JOptionPane.showMessageDialog(null, "Customer create successfully!!", "Info", JOptionPane.INFORMATION_MESSAGE);

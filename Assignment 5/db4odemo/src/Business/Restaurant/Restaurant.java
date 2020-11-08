@@ -9,23 +9,22 @@ import Business.Menu.Dish;
 import Business.Menu.Menu;
 import Business.Order.Order;
 import Business.Order.OrderDirectory;
+import Business.User.User;
 import Business.Util;
 
 /**
  *
  * @author harold
  */
-public class Restaurant {
+public class Restaurant extends User {
 
-    private String name;
     private String location;
-    private String id;
     private Menu menu;
     private boolean opened = true;
     private OrderDirectory orderList;
 
     public Restaurant() {
-        id = Util.generateId();
+        super();
         menu = new Menu();
         orderList = new OrderDirectory();
     }
@@ -50,14 +49,6 @@ public class Restaurant {
         this.opened = opened;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public String getLocation() {
         return location;
     }
@@ -66,11 +57,4 @@ public class Restaurant {
         this.location = location;
     }
 
-    public String getId() {
-        return id;
-    }
-
-    public String toString() {
-        return name;
-    }
 }
