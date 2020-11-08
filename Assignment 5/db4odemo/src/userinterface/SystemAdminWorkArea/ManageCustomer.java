@@ -15,22 +15,24 @@ import java.awt.Component;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
+import userinterface.IRefreshable;
 import userinterface.MainJFrame;
 
 /**
  *
  * @author shaojinnan
  */
-public class ManageCustomer extends javax.swing.JPanel {
+public class ManageCustomer extends javax.swing.JPanel implements IRefreshable{
 
     /**
      * Creates new form ManageCustomers
      */
     ManageCustomer() {
         initComponents();
+        refresh();
     }
 
-    public void refreshTable() {
+    public void refresh() {
         DefaultTableModel model = (DefaultTableModel) CustomerTable.getModel();
         model.setRowCount(0);
         for (UserAccount userAccount : MainJFrame.system.getUserAccountDirectory().getUserAccountList()) {
@@ -171,7 +173,7 @@ public class ManageCustomer extends javax.swing.JPanel {
             UserAccount a = (UserAccount) CustomerTable.getValueAt(selectedRow, 2);
             MainJFrame.system.getUserAccountDirectory().getUserAccountList().remove(a);
             MainJFrame.system.getCustomerDirectory().getCustomers().remove(a.getEmployee());
-            refreshTable();
+            refresh();
         } else {
             JOptionPane.showMessageDialog(null, "Please select a Row!!");
         }
