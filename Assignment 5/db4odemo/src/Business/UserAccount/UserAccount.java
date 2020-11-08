@@ -6,7 +6,7 @@ package Business.UserAccount;
 
 import Business.Employee.Employee;
 import Business.Role.Role;
-import Business.WorkQueue.WorkQueue;
+import Business.Order.OrderDirectory;
 
 /**
  *
@@ -18,10 +18,10 @@ public class UserAccount {
     private String password;
     private Employee employee;
     private Role role;
-    private WorkQueue workQueue;
+    private OrderDirectory workQueue;
 
     public UserAccount() {
-        workQueue = new WorkQueue();
+        workQueue = new OrderDirectory();
     }
     
     
@@ -58,7 +58,7 @@ public class UserAccount {
         return employee;
     }
 
-    public WorkQueue getWorkQueue() {
+    public OrderDirectory getWorkQueue() {
         return workQueue;
     }
 

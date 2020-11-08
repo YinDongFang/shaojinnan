@@ -42,17 +42,17 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
         DefaultTreeModel model=(DefaultTreeModel)jTree.getModel();
         // Add the code for draw your system structure shown by JTree
         DefaultMutableTreeNode root = new DefaultMutableTreeNode("EcoSystem");
-        DefaultMutableTreeNode customerNode = new DefaultMutableTreeNode("Customers");
+        DefaultMutableTreeNode customersNode = new DefaultMutableTreeNode("Customers");
         DefaultMutableTreeNode restaurantsNode = new DefaultMutableTreeNode("Restaurants");
-        DefaultMutableTreeNode deliverymansNode = new DefaultMutableTreeNode("Deliverymans");
+        DefaultMutableTreeNode deliverymenNode = new DefaultMutableTreeNode("Deliverymen");
         
-        root.add(customerNode);
+        root.add(customersNode);
         root.add(restaurantsNode);
-        root.add(deliverymansNode);
+        root.add(deliverymenNode);
         
         CustomerDirectory cd = ecosystem.getCustomerDirectory();
         for(Customer c : cd.getCustomers()) {
-            customerNode.add(new DefaultMutableTreeNode(c));
+            customersNode.add(new DefaultMutableTreeNode(c));
         }
         
         RestaurantDirectory rd = ecosystem.getRestaurantDirectory();
@@ -62,7 +62,7 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
         
         DeliveryManDirectory dd = ecosystem.getDeliveryManDirectory();
         for(DeliveryMan d : dd.getDeliveryMans()) {
-            deliverymansNode.add(new DefaultMutableTreeNode(d));
+            deliverymenNode.add(new DefaultMutableTreeNode(d));
         }
         
         model.setRoot(root);

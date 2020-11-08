@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package Business.WorkQueue;
+package Business.Order;
 
 import java.util.ArrayList;
 
@@ -10,15 +10,15 @@ import java.util.ArrayList;
  *
  * @author raunak
  */
-public class WorkQueue {
+public class OrderDirectory {
     
-    private ArrayList<WorkRequest> workRequestList;
+    private ArrayList<Order> workRequestList;
 
-    public WorkQueue() {
+    public OrderDirectory() {
         workRequestList = new ArrayList();
     }
 
-    public ArrayList<WorkRequest> getWorkRequestList() {
+    public ArrayList<Order> getWorkRequestList() {
         return workRequestList;
     }
 }

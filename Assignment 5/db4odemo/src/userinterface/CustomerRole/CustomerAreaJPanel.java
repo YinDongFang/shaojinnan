@@ -7,7 +7,7 @@ package userinterface.CustomerRole;
 import Business.EcoSystem;
 
 import Business.UserAccount.UserAccount;
-import Business.WorkQueue.WorkRequest;
+import Business.Order.Order;
 import java.awt.CardLayout;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
