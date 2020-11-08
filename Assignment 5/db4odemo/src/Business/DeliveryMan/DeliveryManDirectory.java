@@ -15,24 +15,24 @@ import java.util.List;
 public class DeliveryManDirectory {
     
     
-    private List<DeliveryMan> deliveryMans;
+    private List<DeliveryMan> deliveryMen;
     
     public DeliveryManDirectory() {
-        this.deliveryMans = new ArrayList<DeliveryMan>();
+        this.deliveryMen = new ArrayList<DeliveryMan>();
     }
 
     /**
      * @return the deliveryMans
      */
-    public List<DeliveryMan> getDeliveryMans() {
-        return deliveryMans;
+    public List<DeliveryMan> getDeliveryMen() {
+        return deliveryMen;
     }
 
     /**
-     * @param deliveryMans the deliveryMans to set
+     * @param deliveryMen the deliveryMans to set
      */
-    public void setDeliveryMans(List<DeliveryMan> deliveryMans) {
-        this.deliveryMans = deliveryMans;
+    public void setDeliveryMen(List<DeliveryMan> deliveryMen) {
+        this.deliveryMen = deliveryMen;
     }
     
 }

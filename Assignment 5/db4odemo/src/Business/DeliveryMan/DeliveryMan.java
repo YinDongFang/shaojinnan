@@ -5,24 +5,27 @@
  */
 package Business.DeliveryMan;
 
+import Business.Order.Order;
 import Business.Order.OrderDirectory;
+import Business.Util;
 
 /**
  *
  * @author harold
  */
 public class DeliveryMan {
-    
+
     private String name;
-    private int id;
-    private static int count = 1;
-    private String UserName;
-    private OrderDirectory workQueue;
-    
+    private String id;
+    private OrderDirectory orderList;
+
     public DeliveryMan() {
-        id = count;
-        count++;
-        workQueue = new OrderDirectory();
+        id = Util.generateId();
+        orderList = new OrderDirectory();
+    }
+
+    public void addOrder(Order order) {
+        this.orderList.getOrderList().add(order);
     }
 
     public String getName() {
@@ -33,31 +36,17 @@ public class DeliveryMan {
         this.name = name;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
-    
-    public String getUserName() {
-        return UserName;
+
+    public OrderDirectory getOrderList() {
+        return orderList;
     }
 
-    public void setUserName(String UserName) {
-        this.UserName = UserName;
-    }
-
-    public OrderDirectory getWorkQueue() {
-        return workQueue;
-    }
-
-    public void setWorkQueue(OrderDirectory workQueue) {
-        this.workQueue = workQueue;
-    }
-    
-   @Override
+    @Override
     public String toString() {
         return name;
     }
 
- 
-        
 }

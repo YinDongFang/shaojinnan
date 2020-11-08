@@ -7,15 +7,11 @@ package Business.Menu;
 
 /**
  *
- * @author edmond
+ * @author shaojinnan
  */
 public class Dish {
     private String name;
     private String price;
-    private String produceTime;
-    private String point;
-    private String notes;
-    private int times = 0;
 
     public String getName() {
         return name;
@@ -32,40 +28,7 @@ public class Dish {
     public void setPrice(String price) {
         this.price = price;
     }
-
-    public String getPoint() {
-        return point;
-    }
-
-    public void setPoint(String point) {
-        this.point = point;
-    }
-
-    public int getTimes() {
-        return times;
-    }
-
-    public void setTimes(int times) {
-        this.times = times;
-    }
-
-    public String getProduceTime() {
-        return produceTime;
-    }
-
-    public void setProduceTime(String produceTime) {
-        this.produceTime = produceTime;
-    }
-
-    public String getNotes() {
-        return notes;
-    }
-
-    public void setNotes(String notes) {
-        this.notes = notes;
-    }
-    
-    
+       
     public String toString(){
         return name;
     }

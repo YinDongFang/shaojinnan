@@ -9,13 +9,13 @@ import java.util.ArrayList;
 
 /**
  *
- * @author edmond
+ * @author shaojinnan
  */
 public class Menu {
-    
+
     private ArrayList<Dish> dishesList;
-    
-    public Menu(){
+
+    public Menu() {
         dishesList = new ArrayList();
     }
 
@@ -23,18 +23,4 @@ public class Menu {
         return dishesList;
     }
 
-    public void setDishesCatalog(ArrayList<Dish> dishesCatalog) {
-        this.dishesList = dishesCatalog;
-    }
-    
-    public Dish createDish(){
-        Dish dish = new Dish();
-        dishesList.add(dish);
-        return dish;
-    }
-    
-    public void removeDish(Dish a){
-        dishesList.remove(a);
-    }
-    
 }

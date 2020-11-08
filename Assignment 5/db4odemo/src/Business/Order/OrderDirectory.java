@@ -12,13 +12,13 @@ import java.util.ArrayList;
  */
 public class OrderDirectory {
     
-    private ArrayList<Order> workRequestList;
+    private ArrayList<Order> orderList;
 
     public OrderDirectory() {
-        workRequestList = new ArrayList();
+        orderList = new ArrayList();
     }
 
-    public ArrayList<Order> getWorkRequestList() {
-        return workRequestList;
+    public ArrayList<Order> getOrderList() {
+        return orderList;
     }
 }

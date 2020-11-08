@@ -5,39 +5,50 @@
  */
 package Business.Restaurant;
 
+import Business.Menu.Dish;
 import Business.Menu.Menu;
+import Business.Order.Order;
 import Business.Order.OrderDirectory;
-
+import Business.Util;
 
 /**
  *
  * @author harold
  */
 public class Restaurant {
+
     private String name;
     private String location;
-    private int id;
-    private static int count =1;
-    private Menu dishesCatalog;
-    private String UserName;
-    private String status = "open";
-    private OrderDirectory workQueue;
-    
-    public Restaurant(){
-        id =count;
-        count++;
-        dishesCatalog = new Menu();
-        workQueue = new OrderDirectory();
+    private String id;
+    private Menu menu;
+    private boolean opened = true;
+    private OrderDirectory orderList;
+
+    public Restaurant() {
+        id = Util.generateId();
+        menu = new Menu();
+        orderList = new OrderDirectory();
     }
 
-    public String getUserName() {
-        return UserName;
+    public void addDish(Dish dish) {
+        menu.getDishesCatalog().add(dish);
     }
 
-    public void setUserName(String UserName) {
-        this.UserName = UserName;
+    public void removeDish(Dish dish) {
+        menu.getDishesCatalog().remove(dish);
     }
-    
+
+    public void addOrder(Order order) {
+        this.orderList.getOrderList().add(order);
+    }
+
+    public boolean isOpened() {
+        return opened;
+    }
+
+    public void setOpened(boolean opened) {
+        this.opened = opened;
+    }
 
     public String getName() {
         return name;
@@ -55,40 +66,11 @@ public class Restaurant {
         this.location = location;
     }
 
-    public Menu getDishesCatalog() {
-        return dishesCatalog;
-    }
-
-    public void setDishesCatalog(Menu dishesCatalog) {
-        this.dishesCatalog = dishesCatalog;
-    }
-    
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-    
-    public OrderDirectory getWorkQueue() {
-        return workQueue;
-    }
-
-    public void setWorkQueue(OrderDirectory workQueue) {
-        this.workQueue = workQueue;
-    }
-    
-    
-    public String toString(){
+    public String toString() {
         return name;
     }
 }

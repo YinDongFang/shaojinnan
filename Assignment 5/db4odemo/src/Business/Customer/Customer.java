@@ -5,26 +5,30 @@
  */
 package Business.Customer;
 
+import Business.Order.Order;
 import Business.Order.OrderDirectory;
+import Business.Util;
 
 /**
  *
  * @author harold
  */
 public class Customer {
+
     private String name;
-    private int id;
-    private static int count = 1;
-    private String userName;
-    private OrderDirectory workQueue;
-    
+    private String id;
+    private OrderDirectory orderList;
+
     public Customer() {
-        id = count;
-        count++;
-        workQueue = new OrderDirectory();
+        this.id = Util.generateId();
+        orderList = new OrderDirectory();
     }
 
-    public int getId() {
+    public void addOrder(Order order) {
+        this.orderList.getOrderList().add(order);
+    }
+
+    public String getId() {
         return id;
     }
 
@@ -32,32 +36,17 @@ public class Customer {
         this.name = name;
     }
 
-    
     public String getName() {
         return name;
     }
 
-    public String getUserName() {
-        return userName;
+    public OrderDirectory getOrderList() {
+        return orderList;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
-    public OrderDirectory getWorkQueue() {
-        return workQueue;
-    }
-
-    public void setWorkQueue(OrderDirectory workQueue) {
-        this.workQueue = workQueue;
-    }
-    
-    
     @Override
     public String toString() {
         return name;
     }
-    
-    
+
 }
