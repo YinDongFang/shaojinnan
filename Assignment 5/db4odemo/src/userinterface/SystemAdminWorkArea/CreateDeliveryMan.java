@@ -6,17 +6,16 @@
 package userinterface.SystemAdminWorkArea;
 
 import Business.Customer.Customer;
-import Business.EcoSystem;
-import Business.User.User;
+import Business.DeliveryMan.DeliveryMan;
 import Business.Role.CustomerRole;
+import Business.Role.DeliverManRole;
+import Business.User.User;
 import Business.UserAccount.UserAccount;
-import java.awt.CardLayout;
 import java.awt.Color;
-import java.awt.Component;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
+import userinterface.MainJFrame;
 
 /**
  *
@@ -27,9 +26,8 @@ public class CreateDeliveryMan extends javax.swing.JPanel {
     /**
      * Creates new form CreateCustomer
      */
-    CreateDeliveryMan() {
+    public CreateDeliveryMan() {
         initComponents();
-
     }
 
     /**
@@ -42,21 +40,39 @@ public class CreateDeliveryMan extends javax.swing.JPanel {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        btnCreate = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
         txtName = new javax.swing.JTextField();
-        txtPassword = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
         txtUserName = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        txtPassword = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         txtRePassword = new javax.swing.JTextField();
+        btnCreate = new javax.swing.JButton();
         btnBack = new javax.swing.JButton();
-
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
         jLabel1.setText("Create new deliveryman");
+
+        jLabel2.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
+        jLabel2.setText("Name:");
+
+        txtName.setFont(new java.awt.Font("Lucida Grande", 0, 16)); // NOI18N
+
+        jLabel3.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
+        jLabel3.setText("UserName:");
+
+        txtUserName.setFont(new java.awt.Font("Lucida Grande", 0, 16)); // NOI18N
+
+        jLabel4.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
+        jLabel4.setText("Password:");
+
+        txtPassword.setFont(new java.awt.Font("Lucida Grande", 0, 16)); // NOI18N
+
+        jLabel5.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
+        jLabel5.setText("Re-password:");
+
+        txtRePassword.setFont(new java.awt.Font("Lucida Grande", 0, 16)); // NOI18N
 
         btnCreate.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
         btnCreate.setText("Create");
@@ -66,26 +82,6 @@ public class CreateDeliveryMan extends javax.swing.JPanel {
             }
         });
 
-        jLabel2.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
-        jLabel2.setText("Name:");
-
-        jLabel3.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
-        jLabel3.setText("UserName:");
-
-        jLabel4.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
-        jLabel4.setText("Password:");
-
-        txtName.setFont(new java.awt.Font("Lucida Grande", 0, 16)); // NOI18N
-
-        txtPassword.setFont(new java.awt.Font("Lucida Grande", 0, 16)); // NOI18N
-
-        txtUserName.setFont(new java.awt.Font("Lucida Grande", 0, 16)); // NOI18N
-
-        jLabel5.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
-        jLabel5.setText("Re-password:");
-
-        txtRePassword.setFont(new java.awt.Font("Lucida Grande", 0, 16)); // NOI18N
-
         btnBack.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
         btnBack.setText("<<Back");
         btnBack.addActionListener(new java.awt.event.ActionListener() {
@@ -94,8 +90,8 @@ public class CreateDeliveryMan extends javax.swing.JPanel {
             }
         });
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
@@ -153,19 +149,49 @@ public class CreateDeliveryMan extends javax.swing.JPanel {
                 .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
-
-        pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateActionPerformed
+        // TODO add your handling code here:
+
+        txtName.setForeground(Color.black);
+        txtUserName.setForeground(Color.black);
+        txtPassword.setForeground(Color.black);
+        txtRePassword.setForeground(Color.black);
+
+        if (NamePattern() == false) {
+            JOptionPane.showMessageDialog(null, "Name should be composed of letters!!", "Warning", JOptionPane.WARNING_MESSAGE);
+            txtName.setForeground(Color.red);
+        } else if (UserNamePattern() == false) {
+            JOptionPane.showMessageDialog(null, "Username should be composed of letters or numbers!!", "Warning", JOptionPane.WARNING_MESSAGE);
+            txtUserName.setForeground(Color.red);
+        } else if (PasswordPattern() == false) {
+            JOptionPane.showMessageDialog(null, "Password should be composed of letters or numbers!!", "Warning", JOptionPane.WARNING_MESSAGE);
+            txtPassword.setForeground(Color.red);
+        } else if (samePattern() == false) {
+            JOptionPane.showMessageDialog(null, "Please input consistent password", "Warning", JOptionPane.WARNING_MESSAGE);
+            txtRePassword.setForeground(Color.red);
+        } else if (MainJFrame.system.checkIfUserIsUnique(txtUserName.getText())) {
+            JOptionPane.showMessageDialog(null, "The account has been exist", "Warning", JOptionPane.WARNING_MESSAGE);
+            txtUserName.setForeground(Color.red);
+        } else {
+            DeliveryMan deliveryMan = new DeliveryMan();
+            MainJFrame.system.getDeliveryManDirectory().getDeliveryMen().add(deliveryMan);
+            deliveryMan.setName(txtName.getText());
+
+            UserAccount ua = MainJFrame.system.getUserAccountDirectory().createUserAccount(txtUserName.getText(), txtPassword.getText(), deliveryMan, new DeliverManRole());
+
+            JOptionPane.showMessageDialog(null, "DeliveryMan create successfully!!", "Info", JOptionPane.INFORMATION_MESSAGE);
+            txtName.setText("");
+            txtUserName.setText("");
+            txtPassword.setText("");
+            txtRePassword.setText("");
+        }
+    }//GEN-LAST:event_btnCreateActionPerformed
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         // TODO add your handling code here:
-        /*Container.remove(this);
-        Component [] componentArray = Container.getComponents();
-        Component c = componentArray[componentArray.length-1];
-        ManageFlight m = (ManageFlight) c;
-        m.refreshTable();
-        CardLayout layout = (CardLayout) Container.getLayout();
-        layout.previous(Container);*/
+        MainJFrame.Back(this);
     }//GEN-LAST:event_btnBackActionPerformed
 
     private boolean NamePattern() {
@@ -196,48 +222,6 @@ public class CreateDeliveryMan extends javax.swing.JPanel {
         }
         return b;
     }
-
-    private void btnCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateActionPerformed
-        // TODO add your handling code here:
-        txtName.setForeground(Color.black);
-        txtUserName.setForeground(Color.black);
-        txtPassword.setForeground(Color.black);
-        txtRePassword.setForeground(Color.black);
-
-        /*if (NamePattern() == false) {
-            JOptionPane.showMessageDialog(null, "Name should be composed of letters!!", "Warning", JOptionPane.WARNING_MESSAGE);
-            txtName.setForeground(Color.red);
-        } else if (UserNamePattern() == false) {
-            JOptionPane.showMessageDialog(null, "Username should be composed of letters or numbers!!", "Warning", JOptionPane.WARNING_MESSAGE);
-            txtUserName.setForeground(Color.red);
-        } else if (PasswordPattern() == false) {
-            JOptionPane.showMessageDialog(null, "Password should be composed of letters or numbers!!", "Warning", JOptionPane.WARNING_MESSAGE);
-            txtPassword.setForeground(Color.red);
-        } else if (samePattern() == false) {
-            JOptionPane.showMessageDialog(null, "Please input consistent password", "Warning", JOptionPane.WARNING_MESSAGE);
-            txtRePassword.setForeground(Color.red);
-        } else if (ecosystem.checkIfUserIsUnique(txtUserName.getText())) {
-            JOptionPane.showMessageDialog(null, "The account has been exist", "Warning", JOptionPane.WARNING_MESSAGE);
-            txtUserName.setForeground(Color.red);
-        } else {
-            Customer customer = ecosystem.getCustomerDirectory().createCustomer();
-            customer.setName(txtName.getText());
-            customer.setUserName(txtUserName.getText());
-
-            User employee = ecosystem.getEmployeeDirectory().createEmployee(txtName.getText());
-            UserAccount ua = ecosystem.getUserAccountDirectory().createUserAccount(txtUserName.getText(), txtPassword.getText(), employee, new CustomerRole());
-
-            JOptionPane.showMessageDialog(null, "Customer create successfully!!", "Info", JOptionPane.INFORMATION_MESSAGE);
-            txtName.setText("");
-            txtUserName.setText("");
-            txtPassword.setText("");
-            txtRePassword.setText("");
-        }*/
-    }//GEN-LAST:event_btnCreateActionPerformed
-
-    /**
-     * @param args the command line arguments
-     */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;

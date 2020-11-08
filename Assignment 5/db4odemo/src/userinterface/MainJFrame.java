@@ -10,6 +10,7 @@ import Business.DB4OUtil.DB4OUtil;
 import Business.Organization;
 import Business.UserAccount.UserAccount;
 import java.awt.CardLayout;
+import java.awt.Component;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
@@ -51,9 +52,12 @@ public class MainJFrame extends javax.swing.JFrame {
         CardLayout cardLayout = (CardLayout) layout.getLayout();
         cardLayout.previous(layout);
         int count = layout.getComponentCount();
-        if(count > 0) {
-            IRefreshable refreshable = (IRefreshable)layout.getComponent(count - 1);
-            refreshable.refresh();
+        if (count > 0) {
+            Component c = layout.getComponent(count - 1);
+            if (c instanceof IRefreshable) {
+                IRefreshable refreshable = (IRefreshable) c;
+                refreshable.refresh();
+            }
         }
     }
 
