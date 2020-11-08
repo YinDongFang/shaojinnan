@@ -15,13 +15,15 @@ import javax.swing.JPanel;
  *
  * @author raunak
  */
-public class AdminRole extends Role{
+public class AdminRole extends Role {
+
+    public AdminRole() {
+        super.setRoleType(Role.RoleType.RestaurantAdmin);
+    }
 
     @Override
     public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, EcoSystem business) {
         return new AdminWorkAreaJPanel(userProcessContainer);
     }
 
-    
-    
 }

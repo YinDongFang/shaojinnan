@@ -5,13 +5,17 @@
  */
 package userinterface.SystemAdminWorkArea;
 
-import Business.DeliveryMan.DeliveryMan;
 import Business.EcoSystem;
+import Business.Restaurant.Restaurant;
+import Business.Role.Role;
+import Business.User.User;
+import Business.UserAccount.UserAccount;
 import java.awt.CardLayout;
 import java.awt.Component;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
+import userinterface.MainJFrame;
 
 /**
  *
@@ -22,25 +26,24 @@ public class ManageDeliveryMan extends javax.swing.JPanel {
     /**
      * Creates new form ManageCustomers
      */
-    private JPanel userProcessContainer;
-    private EcoSystem ecosystem;
-    
-    ManageDeliveryMan(JPanel userProcessContainer, EcoSystem ecosystem) {
-        this.userProcessContainer =userProcessContainer;
-        this.ecosystem = ecosystem;
+    ManageDeliveryMan() {
         initComponents();
-        //refreshTable();
     }
-    
-    public void refreshTable(){
+
+    public void refreshTable() {
         DefaultTableModel model = (DefaultTableModel) CustomerTable.getModel();
         model.setRowCount(0);
-        for(DeliveryMan c: ecosystem.getDeliveryManDirectory().getDeliveryManList()){
-            Object row[] = new Object[3];
-            row[0] = c;
-            row[1] = c.getId();
-            row[2] = c.getUserName();
-            model.addRow(row);
+        for (UserAccount userAccount : MainJFrame.system.getUserAccountDirectory().getUserAccountList()) {
+            if (userAccount.getRole().getRoleType() == Role.RoleType.DeliveryMan) {
+                User user = (User) userAccount.getEmployee();
+                Object row[] = new Object[4];
+                row[0] = user.getId();
+                row[1] = user.getName();
+                row[2] = userAccount;
+                row[3] = userAccount.getPassword();
+                model.addRow(row);
+            }
+
         }
     }
 
@@ -68,11 +71,11 @@ public class ManageDeliveryMan extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Name", "ID", "UserName"
+                "ID", "Name", "Username", "Password"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, true
+                false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -83,6 +86,8 @@ public class ManageDeliveryMan extends javax.swing.JPanel {
         if (CustomerTable.getColumnModel().getColumnCount() > 0) {
             CustomerTable.getColumnModel().getColumn(0).setResizable(false);
             CustomerTable.getColumnModel().getColumn(1).setResizable(false);
+            CustomerTable.getColumnModel().getColumn(2).setResizable(false);
+            CustomerTable.getColumnModel().getColumn(3).setResizable(false);
         }
 
         btnBack.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
@@ -114,22 +119,22 @@ public class ManageDeliveryMan extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 113, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnDelete)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnCreate))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 499, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 113, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 499, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnCreate)
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                            .addComponent(btnDelete, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addGap(92, 92, 92))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(31, 31, 31)
-                .addComponent(btnBack)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(237, 237, 237))
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addGap(265, 265, 265))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -142,40 +147,32 @@ public class ManageDeliveryMan extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCreate, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 76, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 75, Short.MAX_VALUE)
                 .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18))
+                .addGap(19, 19, 19))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         // TODO add your handling code here:
-        userProcessContainer.remove(this);
-        Component [] componentArray = userProcessContainer.getComponents();
-        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
-        layout.previous(userProcessContainer);
+        MainJFrame.Back(this);
     }//GEN-LAST:event_btnBackActionPerformed
 
     private void btnCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateActionPerformed
         // TODO add your handling code here:
-        CreateDeliveryMan createDeliveryMan = new CreateDeliveryMan(userProcessContainer,ecosystem);
-        userProcessContainer.add("CreateDeliveryMan",createDeliveryMan);
-        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
-        layout.next(userProcessContainer);
+        CreateDeliveryMan createDeliveryMan = new CreateDeliveryMan();
+        MainJFrame.Add(createDeliveryMan);
     }//GEN-LAST:event_btnCreateActionPerformed
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
         // TODO add your handling code here:
         int selectedRow = CustomerTable.getSelectedRow();
-        if(selectedRow>=0) {
-            int selectionButton = JOptionPane.YES_NO_OPTION;
-            int selectionResult = JOptionPane.showConfirmDialog(null, "Are you sure to remove??","Warning",selectionButton);
-            if(selectionResult == JOptionPane.YES_OPTION){
-                DeliveryMan a = (DeliveryMan) CustomerTable.getValueAt(selectedRow, 0);
-                ecosystem.getDeliveryManDirectory().removeDeliveryMan(a);
-                refreshTable();
-            }
-        }else{
+        if (selectedRow >= 0) {
+            UserAccount a = (UserAccount) CustomerTable.getValueAt(selectedRow, 2);
+            MainJFrame.system.getUserAccountDirectory().getUserAccountList().remove(a);
+            MainJFrame.system.getDeliveryManDirectory().getDeliveryMen().remove(a.getEmployee());
+            refreshTable();
+        } else {
             JOptionPane.showMessageDialog(null, "Please select a Row!!");
         }
     }//GEN-LAST:event_btnDeleteActionPerformed

@@ -61,7 +61,7 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
         }
         
         DeliveryManDirectory dd = ecosystem.getDeliveryManDirectory();
-        for(DeliveryMan d : dd.getDeliveryMans()) {
+        for(DeliveryMan d : dd.getDeliveryMen()) {
             deliverymenNode.add(new DefaultMutableTreeNode(d));
         }
         

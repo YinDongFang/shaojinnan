@@ -22,13 +22,39 @@ public class MainJFrame extends javax.swing.JFrame {
     /**
      * Creates new form MainJFrame
      */
-    private EcoSystem system;
+    public static EcoSystem system;
     private DB4OUtil dB4OUtil = DB4OUtil.getInstance();
+
+    private static javax.swing.JPanel layout;
 
     public MainJFrame() {
         initComponents();
         system = dB4OUtil.retrieveSystem();
         this.setSize(1680, 1050);
+
+        layout = container;
+    }
+
+    public static void New(JPanel jPanel) {
+        layout.removeAll();
+        Add(jPanel);
+    }
+
+    public static void Add(JPanel jPanel) {
+        layout.add(jPanel);
+        CardLayout cardLayout = (CardLayout) layout.getLayout();
+        cardLayout.next(layout);
+    }
+
+    public static void Back(JPanel jPanel) {
+        layout.remove(jPanel);
+        CardLayout cardLayout = (CardLayout) layout.getLayout();
+        cardLayout.previous(layout);
+        int count = layout.getComponentCount();
+        if(count > 0) {
+            IRefreshable refreshable = (IRefreshable)layout.getComponent(count - 1);
+            refreshable.refresh();
+        }
     }
 
     /**
@@ -125,17 +151,17 @@ public class MainJFrame extends javax.swing.JFrame {
         // Get user name
         String username = userNameJTextField.getText();
         String password = userNameJTextField.getText();
-        UserAccount userAccount = system.getUserAccountDirectory().authenticateUser(username, password);  
-        if(userAccount == null) {
+        UserAccount userAccount = system.getUserAccountDirectory().authenticateUser(username, password);
+        if (userAccount == null) {
             JOptionPane.showMessageDialog(null, "error: wrong username or password!");
         } else {
             //Show the panel
             JPanel jPanel = userAccount.getRole().createWorkArea(container, userAccount, system);
             container.removeAll();
             container.add(jPanel);
-            CardLayout layout = (CardLayout)container.getLayout();
+            CardLayout layout = (CardLayout) container.getLayout();
             layout.next(container);
-        } 
+        }
     }//GEN-LAST:event_loginJButtonActionPerformed
 
     private void logoutJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutJButtonActionPerformed

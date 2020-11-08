@@ -15,12 +15,14 @@ import javax.swing.JPanel;
  *
  * @author raunak
  */
-public class CustomerRole extends Role{
+public class CustomerRole extends Role {
 
-    
+    public CustomerRole() {
+        super.setRoleType(Role.RoleType.Customer);
+    }
+
     public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, EcoSystem business) {
         return new CustomerAreaJPanel(userProcessContainer, account);
     }
-    
-    
+
 }

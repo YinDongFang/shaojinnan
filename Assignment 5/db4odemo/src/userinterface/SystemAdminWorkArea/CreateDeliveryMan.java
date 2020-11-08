@@ -22,18 +22,14 @@ import javax.swing.JPanel;
  *
  * @author shaojinnan
  */
-public class CreateDeliveryMan extends javax.swing.JFrame {
+public class CreateDeliveryMan extends javax.swing.JPanel {
 
     /**
      * Creates new form CreateCustomer
      */
-    private JPanel userProcessContainer;
-    private EcoSystem ecosystem;
-
-    CreateDeliveryMan(JPanel userProcessContainer, EcoSystem ecosystem) {
+    CreateDeliveryMan() {
         initComponents();
-        this.userProcessContainer = userProcessContainer;
-        this.ecosystem = ecosystem;
+
     }
 
     /**
@@ -171,85 +167,78 @@ public class CreateDeliveryMan extends javax.swing.JFrame {
         CardLayout layout = (CardLayout) Container.getLayout();
         layout.previous(Container);*/
     }//GEN-LAST:event_btnBackActionPerformed
-    
-    private boolean NamePattern(){
+
+    private boolean NamePattern() {
         Pattern p = Pattern.compile("[a-zA-Z]+");
         Matcher m = p.matcher(txtName.getText());
         boolean b = m.matches();
         return b;
     }
-    
-    private boolean UserNamePattern(){
+
+    private boolean UserNamePattern() {
         Pattern p = Pattern.compile("[a-zA-Z0-9]+");
         Matcher m = p.matcher(txtUserName.getText());
         boolean b = m.matches();
         return b;
     }
-    
-    private boolean PasswordPattern(){
+
+    private boolean PasswordPattern() {
         Pattern p = Pattern.compile("[a-zA-Z0-9]+");
         Matcher m = p.matcher(txtPassword.getText());
         boolean b = m.matches();
         return b;
     }
-    
-    private boolean samePattern(){
+
+    private boolean samePattern() {
         boolean b = false;
-        if(txtPassword.getText().equals(txtRePassword.getText())){
+        if (txtPassword.getText().equals(txtRePassword.getText())) {
             b = true;
         }
         return b;
     }
-    
+
     private void btnCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateActionPerformed
         // TODO add your handling code here:
         txtName.setForeground(Color.black);
         txtUserName.setForeground(Color.black);
         txtPassword.setForeground(Color.black);
-        txtRePassword.setForeground(Color.black); 
-        
-        if(NamePattern() == false){
-        JOptionPane.showMessageDialog(null, "Name should be composed of letters!!", "Warning", JOptionPane.WARNING_MESSAGE);
-        txtName.setForeground(Color.red);}
-             
-        else if(UserNamePattern() == false){
-        JOptionPane.showMessageDialog(null, "Username should be composed of letters or numbers!!", "Warning", JOptionPane.WARNING_MESSAGE);
-        txtUserName.setForeground(Color.red);}
-        
-        else if(PasswordPattern() == false){
-        JOptionPane.showMessageDialog(null, "Password should be composed of letters or numbers!!", "Warning", JOptionPane.WARNING_MESSAGE);
-        txtPassword.setForeground(Color.red);}
-        
-        else if(samePattern() == false){
-        JOptionPane.showMessageDialog(null, "Please input consistent password", "Warning", JOptionPane.WARNING_MESSAGE);
-        txtRePassword.setForeground(Color.red);
-        }
-        
-        else if(ecosystem.checkIfUserIsUnique(txtUserName.getText())){
-        JOptionPane.showMessageDialog(null, "The account has been exist", "Warning", JOptionPane.WARNING_MESSAGE);
-        txtUserName.setForeground(Color.red);
-        }
-        
-        else{
-        Customer customer =  ecosystem.getCustomerDirectory().createCustomer();
-        customer.setName(txtName.getText());
-        customer.setUserName(txtUserName.getText());
-        
-        User employee = ecosystem.getEmployeeDirectory().createEmployee(txtName.getText());
-        UserAccount ua = ecosystem.getUserAccountDirectory().createUserAccount(txtUserName.getText(), txtPassword.getText(), employee, new CustomerRole());
-        
-        JOptionPane.showMessageDialog(null, "Customer create successfully!!", "Info", JOptionPane.INFORMATION_MESSAGE);
-        txtName.setText("");
-        txtUserName.setText("");
-        txtPassword.setText("");
-        txtRePassword.setText("");
-        }
+        txtRePassword.setForeground(Color.black);
+
+        /*if (NamePattern() == false) {
+            JOptionPane.showMessageDialog(null, "Name should be composed of letters!!", "Warning", JOptionPane.WARNING_MESSAGE);
+            txtName.setForeground(Color.red);
+        } else if (UserNamePattern() == false) {
+            JOptionPane.showMessageDialog(null, "Username should be composed of letters or numbers!!", "Warning", JOptionPane.WARNING_MESSAGE);
+            txtUserName.setForeground(Color.red);
+        } else if (PasswordPattern() == false) {
+            JOptionPane.showMessageDialog(null, "Password should be composed of letters or numbers!!", "Warning", JOptionPane.WARNING_MESSAGE);
+            txtPassword.setForeground(Color.red);
+        } else if (samePattern() == false) {
+            JOptionPane.showMessageDialog(null, "Please input consistent password", "Warning", JOptionPane.WARNING_MESSAGE);
+            txtRePassword.setForeground(Color.red);
+        } else if (ecosystem.checkIfUserIsUnique(txtUserName.getText())) {
+            JOptionPane.showMessageDialog(null, "The account has been exist", "Warning", JOptionPane.WARNING_MESSAGE);
+            txtUserName.setForeground(Color.red);
+        } else {
+            Customer customer = ecosystem.getCustomerDirectory().createCustomer();
+            customer.setName(txtName.getText());
+            customer.setUserName(txtUserName.getText());
+
+            User employee = ecosystem.getEmployeeDirectory().createEmployee(txtName.getText());
+            UserAccount ua = ecosystem.getUserAccountDirectory().createUserAccount(txtUserName.getText(), txtPassword.getText(), employee, new CustomerRole());
+
+            JOptionPane.showMessageDialog(null, "Customer create successfully!!", "Info", JOptionPane.INFORMATION_MESSAGE);
+            txtName.setText("");
+            txtUserName.setText("");
+            txtPassword.setText("");
+            txtRePassword.setText("");
+        }*/
     }//GEN-LAST:event_btnCreateActionPerformed
 
     /**
      * @param args the command line arguments
      */
-    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;
     private javax.swing.JButton btnCreate;
